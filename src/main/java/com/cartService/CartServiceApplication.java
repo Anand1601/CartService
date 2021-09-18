@@ -17,6 +17,7 @@ public class CartServiceApplication {
 
 
 ApplicationContext applicationContext = SpringApplication.run(CartServiceApplication.class,args);
+/*
 CartDao cartDao = applicationContext.getBean(CartDao.class);
 		ItemDao itemDao = applicationContext.getBean(ItemDao.class);
 
@@ -24,26 +25,31 @@ CartDao cartDao = applicationContext.getBean(CartDao.class);
 		System.out.println("item :"+itemDao);
 		System.out.println("Hello spring");
 
-		/*
+		*/
+/*
 		* create cart
-		* */
+		* *//*
+
 
 		Cart cart = new Cart();
-		cart.setCustomerName("vishwa mohan");
+		cart.setCustomerName("vivek mohan");
 		cartDao.save(cart);
 
-		/*
+		*/
+/*
 		* Items
-		* */
+		* *//*
+
 
 		Item item = new Item();
 		item.setItemName("detergent powder");
 		item.setCategory("Households");
 		item.setItemDescription("Grate product ");
-		item.setCost(400);
+		item.setCost(500);
 		item.setMfgDate(LocalDateTime.of(2021,7,12,10,2));
 		item.setCart(cart);
 		itemDao.save(item);
+*/
 
 	}
 

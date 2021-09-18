@@ -1,6 +1,7 @@
 package com.cartService.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,17 @@ public class Cart {
 
     @OneToMany(mappedBy = "cart")
     private List<Item> items;
+
+
+    public Cart(int cartId, String customerName, List<Item> items) {
+        this.cartId = cartId;
+        this.customerName = customerName;
+        this.items = items;
+    }
+
+    public Cart(){
+        items = new ArrayList<>();
+    }
 
     public int getCartId() {
         return cartId;

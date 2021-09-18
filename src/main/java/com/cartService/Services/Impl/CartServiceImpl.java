@@ -27,7 +27,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart findBYCartId(int cartId) throws CartNotFoundException {
-        return cartDao.findById(cartId).orElseThrow(CartNotFoundException::new);
+        return cartDao.findById(cartId).orElseThrow(() -> new CartNotFoundException());
 
 
     }
