@@ -47,6 +47,14 @@ public class DTOToEntityConvertor {
 
     private static ItemDTO convertItemEntityToItemDTO(Item item) {
 
+        ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setItemId(item.getItemId());
+        itemDTO.setItemName(item.getItemName());
+        itemDTO.setItemDescription(item.getItemDescription());
+        itemDTO.setCategory(item.getCategory());
+        itemDTO.setCost(item.getCost());
+        itemDTO.setMfgDate(item.getMfgDate());
+
     }
 
 }

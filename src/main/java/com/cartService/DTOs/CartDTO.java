@@ -4,6 +4,7 @@ package com.cartService.DTOs;
 import com.cartService.Entities.Item;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartDTO {
@@ -22,6 +23,10 @@ public class CartDTO {
         this.cartId = cartId;
         this.customerName = customerName;
         this.items = items;
+    }
+
+    public CartDTO() {
+        items = new ArrayList<>();
     }
 
     public int getCartId() {
