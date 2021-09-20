@@ -54,9 +54,8 @@ public class CartServiceImplTest {
 
         Cart savedCart = cartService.createCart(cart);
 
-        //testing
         Assertions.assertNotNull(savedCart);
-        Assertions.assertEquals(1,savedCart.getCartId());
+        Assertions.assertEquals(cart1,savedCart);
 
 
     }
@@ -87,16 +86,10 @@ public class CartServiceImplTest {
     * */
     @Test
     public void testDeleteCart() throws CartNotFoundException {
-        //data
-
-
-        //Mock -- When we have to mack a method that returns nothing
         Mockito.doNothing().when(cartDaoMock).deleteById(1);
 
-        //Execution
         boolean deleteResult = cartService.deleteCart(1);
 
-        //Assertion
         Assertions.assertTrue(deleteResult);
 
 
