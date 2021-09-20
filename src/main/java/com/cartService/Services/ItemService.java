@@ -8,7 +8,9 @@ import com.cartService.Exceptions.ItemNotFoundException;
 import java.util.List;
 
 public interface ItemService {
-      public Item addItemCart(Item item, int cartId) throws CartNotFoundException;
-    public Cart getCartOfItem(int itemId) throws ItemNotFoundException;
-    public List<Item> getItemsFromTheCart(int cartId) throws CartNotFoundException;
+      public Item createItem(Item item) throws CartNotFoundException;
+      public Item findByItemId(int itemId) throws ItemNotFoundException;
+      public Item updateItemDetails(int itemId, Item item) throws ItemNotFoundException;
+      public Cart getCartOfItem(int itemId) throws ItemNotFoundException;
+
 }

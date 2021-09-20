@@ -1,13 +1,18 @@
 package com.cartService.Service.Impl;
 
 import com.cartService.Daos.CartDao;
+import com.cartService.Daos.ItemDao;
 import com.cartService.Entities.Cart;
+import com.cartService.Entities.Item;
 import com.cartService.Exceptions.CartNotFoundException;
 import com.cartService.Exceptions.CustomerNameNotFoundException;
 import com.cartService.Services.Impl.CartServiceImpl;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -23,6 +28,15 @@ public class CartServiceImplTest {
 
     @InjectMocks
     CartServiceImpl cartService;
+
+
+    @Mock
+    ItemDao itemDao;
+
+    @InjectMocks
+    ItemServiceImplTest itemService;
+
+
 
     /*
     * Test for CreateCart
@@ -60,7 +74,7 @@ public class CartServiceImplTest {
         cart1.setCartId(1);
 
         Mockito.when(cartDaoMock.findById(1)).thenReturn(Optional.of(cart1));
-        Cart cart = cartService.findBYCartId(1);
+        Cart cart = cartService.findByCartId(1);
 
         Assertions.assertNotNull(cart);
         Assertions.assertEquals("vivek",cart.getCustomerName());
@@ -72,7 +86,7 @@ public class CartServiceImplTest {
     * Test for deleteCart
     * */
     @Test
-    public void testDeleteCart(){
+    public void testDeleteCart() throws CartNotFoundException {
         //data
 
 
@@ -83,32 +97,12 @@ public class CartServiceImplTest {
         boolean deleteResult = cartService.deleteCart(1);
 
         //Assertion
-        Assert.assertTrue(deleteResult);
+        Assertions.assertTrue(deleteResult);
 
 
     }
 
 
-    /*
-    * Test for FindByCartIdThrowsException
-    * */
-    @Test
-    public void testFindByCartIdThrowsExceptions(){
-//in this we have forcefully thrown the exception by returning Optional.empty();
-        Cart cart1 = new Cart();
-        cart1.setCustomerName("vivek");
-        cart1.setCartId(1);
-
-        Mockito.when(cartDaoMock.findById(1)).thenReturn(Optional.empty());
-
-
-        try {
-            Cart cart = cartService.findBYCartId(1);
-        } catch (Exception e) {
-            Assertions.assertEquals(CartNotFoundException.class, e.getClass());
-        }
-
-    }
 
     /*
     * Test findByCustomerName
@@ -128,6 +122,36 @@ public class CartServiceImplTest {
         Assertions.assertEquals("vivek",cart.getCustomerName());
 
         }
+
+      /*
+      * test getItemsOfTheCart
+      * */
+
+    @Test
+    public void testGetItemsOfTheCart() throws CartNotFoundException {
+
+        Cart cart = new Cart();
+        cart.setCartId(1);
+        cart.setCustomerName("anand");
+        Item item = new Item();
+        item.setCart(cart);
+        item.setCategory("electronics");
+        item.setItemDescription("it is an smartphone");
+        item.setItemName("iphone");
+        item.setCost(51000);
+        item.setMfgDate(LocalDateTime.of(2020,11,12,3,0));
+
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(item);
+        cart.setItems(itemList);
+        Mockito.when(cartDaoMock.findById(1)).thenReturn(Optional.of(cart));
+
+        List<Item> items = cartService.getItemsOfTheCart(1);
+
+
+        Assertions.assertNotNull(items);
+        Assertions.assertNotEquals(0,items.size());
+    }
 
 
 

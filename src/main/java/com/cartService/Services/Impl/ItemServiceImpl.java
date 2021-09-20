@@ -27,39 +27,36 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     CartService cartService;
 
-        public Item addItemCart(Item item, int cartId) throws CartNotFoundException {
-
-            logger.debug("Arguments passed are: "+item+"and cart id: "+cartId);
-            logger.info("Getting inside the addItemToCart method");
-
-            Cart cart = cartService.findBYCartId(cartId);
-            item.setCart(cart);
-
-            logger.info("Returning from the addItemToCart method");
-
+        public Item createItem(Item item) throws CartNotFoundException {
             return itemDao.save(item);
         }
+
+    @Override
+    public Item findByItemId(int itemId) throws ItemNotFoundException {
+        return itemDao.findById(itemId).orElseThrow(()->new ItemNotFoundException());
+    }
+
+    @Override
+    public Item updateItemDetails(int itemId, Item item) throws ItemNotFoundException {
+     Item savedItem = itemDao.findById(itemId).orElseThrow(()->new ItemNotFoundException());
+
+     savedItem.setItemName(item.getItemName());
+     savedItem.setItemDescription(item.getItemDescription());
+     savedItem.setCategory(item.getCategory());
+     savedItem.setCost(item.getCost());
+     savedItem.setCart(item.getCart());
+     savedItem.setMfgDate(item.getMfgDate());
+     return itemDao.save(savedItem);
+    }
 
     public Cart getCartOfItem(int itemId) throws ItemNotFoundException {
 
             Item item = itemDao.findById(itemId).orElseThrow(()-> new ItemNotFoundException());
 
-            /*
-            * Item -> Cart : Many to One : Egger Initialization
-            * */
         return item.getCart();
 
     }
 
-    public List<Item> getItemsFromTheCart(int cartId) throws CartNotFoundException{
-
-            Cart cart = cartService.findBYCartId(cartId);
-            //cart -> item :by defoult it is Lazy initialization as cart initialized but it has no items, so we do this by:-
-
-
-        return itemDao.findItemsByCart(cart);
-
-    }
 
 
 }

@@ -5,22 +5,21 @@ import com.cartService.DTOs.ItemDTO;
 import com.cartService.Entities.Cart;
 import com.cartService.Entities.Item;
 
-public class DTOToEntityConvertor {
+public class DTOEntityMapper {
 
-    public static Cart convertCartDTOToCartEntity(CartDTO cartDTO){
+    public static Cart convertCartDTOToCartEntity(CartDTO cartDTO) {
 
         Cart cart = new Cart();
         cart.setCartId(cartDTO.getCartId());
         cart.setCustomerName(cartDTO.getCustomerName());
-        for(ItemDTO itemDTO:cartDTO.getItems())
-        {
+        for (ItemDTO itemDTO : cartDTO.getItems()) {
             cart.getItems().add(convertItemDTOToItemEntity(itemDTO));
         }
 
         return cart;
     }
 
-    private static Item convertItemDTOToItemEntity(ItemDTO itemDTO) {
+    public static Item convertItemDTOToItemEntity(ItemDTO itemDTO) {
         Item item = new Item();
         item.setItemName(itemDTO.getItemName());
         item.setItemDescription(itemDTO.getItemDescription());
@@ -32,20 +31,18 @@ public class DTOToEntityConvertor {
         return item;
     }
 
-    public static CartDTO convertCArtEntityToCartDTO(Cart cart)
-    {
-          CartDTO cartDTO = new CartDTO();
+    public static CartDTO convertCartEntityToCartDTO(Cart cart) {
+        CartDTO cartDTO = new CartDTO();
         cartDTO.setCartId(cart.getCartId());
         cartDTO.setCustomerName(cart.getCustomerName());
-        for(Item item:cart.getItems())
-        {
+        for (Item item : cart.getItems()) {
             cartDTO.getItems().add(convertItemEntityToItemDTO(item));
         }
 
         return cartDTO;
     }
 
-    private static ItemDTO convertItemEntityToItemDTO(Item item) {
+    public static ItemDTO convertItemEntityToItemDTO(Item item) {
 
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setItemId(item.getItemId());
@@ -54,7 +51,7 @@ public class DTOToEntityConvertor {
         itemDTO.setCategory(item.getCategory());
         itemDTO.setCost(item.getCost());
         itemDTO.setMfgDate(item.getMfgDate());
-
+        return itemDTO;
     }
 
 }
