@@ -49,11 +49,11 @@ public class ItemServiceImpl implements ItemService {
      return itemDao.save(savedItem);
     }
 
-    public Cart getCartOfItem(int itemId) throws ItemNotFoundException {
+    public int getCartOfItem(int itemId) throws ItemNotFoundException {
 
             Item item = itemDao.findById(itemId).orElseThrow(()-> new ItemNotFoundException());
 
-        return item.getCart();
+        return item.getCart().getCartId();
 
     }
 

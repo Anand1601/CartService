@@ -84,7 +84,9 @@ public class ItemServiceImplTest {
 
      }
 
-
+/*
+* test getCartOfItem
+* */
      @Test
     public void testGetCartOfItem() throws ItemNotFoundException {
          Cart cart = new Cart();
@@ -99,9 +101,9 @@ public class ItemServiceImplTest {
 
      Mockito.when(itemDaoMock.findById(1)).thenReturn(Optional.of(item));
 
-     Cart cart1 = itemService.getCartOfItem(1);
+     int cartId = itemService.getCartOfItem(1);
 
-     Assertions.assertNotNull(cart1);
+     Assertions.assertEquals(cartId,cart.getCartId());
 
     }
 

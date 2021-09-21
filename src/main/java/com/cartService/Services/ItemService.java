@@ -11,6 +11,6 @@ public interface ItemService {
       public Item createItem(Item item) throws CartNotFoundException;
       public Item findByItemId(int itemId) throws ItemNotFoundException;
       public Item updateItemDetails(int itemId, Item item) throws ItemNotFoundException;
-      public Cart getCartOfItem(int itemId) throws ItemNotFoundException;
+      public int getCartOfItem(int itemId) throws ItemNotFoundException;
 
 }
