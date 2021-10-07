@@ -14,7 +14,7 @@ public class Cart {
     @Column(nullable=false, unique=true)
     private String customerName;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
     private List<Item> items;
 
 

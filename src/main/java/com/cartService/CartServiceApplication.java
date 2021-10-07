@@ -1,9 +1,5 @@
 package com.cartService;
 
-import com.cartService.Daos.CartDao;
-import com.cartService.Daos.ItemDao;
-import com.cartService.Entities.Cart;
-import com.cartService.Entities.Item;
 import org.springframework.context.ApplicationContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +14,7 @@ public class CartServiceApplication {
 
 ApplicationContext applicationContext = SpringApplication.run(CartServiceApplication.class,args);
 
+System.out.println("hello spring");
 
 	}
 

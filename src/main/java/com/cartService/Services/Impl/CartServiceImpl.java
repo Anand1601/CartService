@@ -4,6 +4,7 @@ import com.cartService.Daos.CartDao;
 import com.cartService.Entities.Cart;
 import com.cartService.Entities.Item;
 import com.cartService.Exceptions.CartNotFoundException;
+import com.cartService.Exceptions.CustomerNameAlreadyExistsException;
 import com.cartService.Exceptions.CustomerNameNotFoundException;
 import com.cartService.Exceptions.ItemNotFoundException;
 import com.cartService.Services.CartService;
@@ -23,8 +24,10 @@ public class CartServiceImpl implements CartService {
     ItemService itemService;
 
     @Override
-    public Cart createCart(Cart cart) {
-       return cartDao.save(cart);
+    public Cart createCart(Cart cart) throws CustomerNameAlreadyExistsException {
+        if(cartDao.findByCustomerName(cart.getCustomerName())!=null)
+            throw new CustomerNameAlreadyExistsException();
+        return cartDao.save(cart);
     }
 
     @Override

@@ -1,2 +1,4 @@
-package com.cartService.Exceptions;public class CustomerNameAlreadyExistsException {
+package com.cartService.Exceptions;
+
+public class CustomerNameAlreadyExistsException extends Exception {
 }

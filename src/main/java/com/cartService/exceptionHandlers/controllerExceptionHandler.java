@@ -27,5 +27,9 @@ return new ResponseEntity("Cart Id passed is invalid/not found", HttpStatus.BAD_
         return new ResponseEntity("No item found/invalid item",HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CustomerNameNotFoundException.class)
+    public ResponseEntity handleCustomerAlreadyExistsException(){
+        return  new ResponseEntity("cart for this customer already exists", HttpStatus.BAD_REQUEST);
+    }
 
 }

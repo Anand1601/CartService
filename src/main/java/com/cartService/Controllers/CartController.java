@@ -5,6 +5,7 @@ import com.cartService.DTOs.ItemDTO;
 import com.cartService.Entities.Cart;
 import com.cartService.Entities.Item;
 import com.cartService.Exceptions.CartNotFoundException;
+import com.cartService.Exceptions.CustomerNameAlreadyExistsException;
 import com.cartService.Exceptions.CustomerNameNotFoundException;
 import com.cartService.Exceptions.ItemNotFoundException;
 import com.cartService.Services.CartService;
@@ -40,9 +41,11 @@ public class CartController {
     * POST 127.0.0.1:8080/cartService/v1/carts
     * */
     @PostMapping
-    public ResponseEntity createCart(@RequestBody CartDTO cartDTO)
-    {
-         Cart cart =cartService.createCart(DTOEntityMapper.convertCartDTOToCartEntity(cartDTO));
+    public ResponseEntity createCart(@RequestBody CartDTO cartDTO) throws CustomerNameAlreadyExistsException {
+
+     Cart cartRequest = DTOEntityMapper.convertCartDTOToCartEntity(cartDTO);
+     Cart cart =cartService.createCart(cartRequest);
+
          CartDTO cartResponse = DTOEntityMapper.convertCartEntityToCartDTO(cart);
          return new ResponseEntity(cartResponse,HttpStatus.CREATED);
     }

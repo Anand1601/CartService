@@ -5,6 +5,7 @@ import com.cartService.Daos.ItemDao;
 import com.cartService.Entities.Cart;
 import com.cartService.Entities.Item;
 import com.cartService.Exceptions.CartNotFoundException;
+import com.cartService.Exceptions.CustomerNameAlreadyExistsException;
 import com.cartService.Exceptions.CustomerNameNotFoundException;
 import com.cartService.Services.Impl.CartServiceImpl;
 
@@ -42,7 +43,7 @@ public class CartServiceImplTest {
     * Test for CreateCart
     * */
     @Test
-    public void testCreateCart(){
+    public void testCreateCart() throws CustomerNameNotFoundException, CustomerNameAlreadyExistsException {
         Cart cart = new Cart();
         cart.setCustomerName("anand bharti");
 
