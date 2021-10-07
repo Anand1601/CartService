@@ -1,6 +1,7 @@
 package com.cartService.exceptionHandlers;
 
 import com.cartService.Exceptions.CartNotFoundException;
+import com.cartService.Exceptions.CustomerNameAlreadyExistsException;
 import com.cartService.Exceptions.CustomerNameNotFoundException;
 import com.cartService.Exceptions.ItemNotFoundException;
 import org.apache.coyote.Response;
@@ -27,7 +28,7 @@ return new ResponseEntity("Cart Id passed is invalid/not found", HttpStatus.BAD_
         return new ResponseEntity("No item found/invalid item",HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CustomerNameNotFoundException.class)
+    @ExceptionHandler(CustomerNameAlreadyExistsException.class)
     public ResponseEntity handleCustomerAlreadyExistsException(){
         return  new ResponseEntity("cart for this customer already exists", HttpStatus.BAD_REQUEST);
     }

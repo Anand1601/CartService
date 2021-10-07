@@ -15,7 +15,6 @@ public class ItemDTO {
     @JsonProperty("item_description")
     private String itemDescription;
 
-
     private String category;
 
     private double cost;
