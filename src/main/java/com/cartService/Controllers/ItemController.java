@@ -61,16 +61,7 @@ public class ItemController {
         return new ResponseEntity(itemResponse,HttpStatus.OK);
     }
 
-    /*
-    * end point to get cart of item
-    *
-    * GET 127.0.0.1.8080/cartService/v1/items/{item_id}/cart
-    * */
-    @GetMapping("/{item_id}/cart")
-    public ResponseEntity getCartOfItem(@PathVariable("item_id")int itemId) throws ItemNotFoundException {
-        int cartId = itemService.getCartOfItem(itemId);
-        return new ResponseEntity("cart of item with itemId"+itemId+": "+cartId,HttpStatus.OK);
-    }
+
 
 
 }

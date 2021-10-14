@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.module.ResolutionException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class CartController {
      * */
     @GetMapping("/{cart_id}")
     public  ResponseEntity getCart(@PathVariable("cart_id") int cartId) throws CartNotFoundException {
-        Cart cart = cartService.findByCartId(cartId);
+        Cart cart = cartService.getCartByCartId(cartId);
         CartDTO cartResponse = DTOEntityMapper.convertCartEntityToCartDTO(cart);
          return new ResponseEntity(cartResponse,HttpStatus.OK);
 
@@ -69,10 +68,10 @@ public class CartController {
      *
      * POST 127.0.01:8080/cartService/v1/carts/{cart_id}
      * */
-    @PostMapping("/{cart_id}")
-    public ResponseEntity addItemToCart(@RequestBody ItemDTO itemDTO , @PathVariable("cart_id")int cartId) throws CartNotFoundException, ItemNotFoundException {
-        Cart cart =  cartService.addItemToTheCart(DTOEntityMapper.convertItemDTOToItemEntity(itemDTO),cartId);
+  @PostMapping("/{item_id}/{cart_id}")
+    public ResponseEntity addItemToCart(@PathVariable("item_id") int itemId , @PathVariable("cart_id")int cartId) throws CartNotFoundException, ItemNotFoundException {
 
+      Cart cart =  cartService.addItemToTheCart(itemId,cartId);
         CartDTO cartDTO = DTOEntityMapper.convertCartEntityToCartDTO(cart);
         return new ResponseEntity(cartDTO,HttpStatus.CREATED);
 
@@ -82,9 +81,9 @@ public class CartController {
     /*
      * get all items of the cart based on the cartId
      *
-     * GET 127.0.01:8080/cartService/v1/carts/{cart_id}
+     * GET 127.0.01:8080/cartService/v1/carts/items/{cart_id}
      * */
-    @GetMapping("/{cart_id}/items")
+    @GetMapping("/items/{cart_id}")
     public ResponseEntity listOfItemsOfTheCart(@PathVariable("cart_id")int cartId) throws CartNotFoundException {
         List<Item> list = cartService.getItemsOfTheCart(cartId);
         List<ItemDTO> listOfItems = new ArrayList<>();
@@ -111,7 +110,7 @@ public class CartController {
      * */
     @GetMapping("/customer_name/{customer_name}")
     public ResponseEntity getCartByCustomerName(@PathVariable("customer_name")String customerName) throws CustomerNameNotFoundException {
-        Cart cart = cartService.findByCustomerName(customerName);
+        Cart cart = cartService.getCartByCustomerName(customerName);
         return new ResponseEntity(cart,HttpStatus.OK);
     }
 

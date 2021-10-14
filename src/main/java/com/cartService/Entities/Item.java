@@ -19,13 +19,12 @@ public class Item {
     @Column
     private String Category;
 
-
-
     @Column(nullable = false)
     private double cost;
 
     @Column(nullable = false)
     private LocalDateTime mfgDate;
+
 
     @ManyToOne
     @JoinColumn(name = "cart_id")

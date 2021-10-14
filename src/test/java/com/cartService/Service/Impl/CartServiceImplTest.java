@@ -64,7 +64,7 @@ public class CartServiceImplTest {
 
 
 /*
-* Test for findByCartId
+* Test for getCartByCartId
 * */
     @Test
     public void testFindByCartId() throws CartNotFoundException {
@@ -74,7 +74,7 @@ public class CartServiceImplTest {
         cart1.setCartId(1);
 
         Mockito.when(cartDaoMock.findById(1)).thenReturn(Optional.of(cart1));
-        Cart cart = cartService.findByCartId(1);
+        Cart cart = cartService.getCartByCartId(1);
 
         Assertions.assertNotNull(cart);
         Assertions.assertEquals("vivek",cart.getCustomerName());
@@ -99,7 +99,7 @@ public class CartServiceImplTest {
 
 
     /*
-    * Test findByCustomerName
+    * Test getCartByCustomerName
     * */
         @Test
         public void  findByCustomerName() throws CustomerNameNotFoundException {
@@ -110,7 +110,7 @@ public class CartServiceImplTest {
 
         Mockito.when(cartDaoMock.findByCustomerName("vivek")).thenReturn(cart1);
 
-        Cart cart = cartService.findByCustomerName("vivek");
+        Cart cart = cartService.getCartByCustomerName("vivek");
 
         Assertions.assertNotNull(cart);
         Assertions.assertEquals("vivek",cart.getCustomerName());

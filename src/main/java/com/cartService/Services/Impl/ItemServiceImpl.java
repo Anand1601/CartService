@@ -27,17 +27,22 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     CartService cartService;
 
-        public Item createItem(Item item) throws CartNotFoundException {
+        public Item createItem(Item item)  {
+            logger.info("adding a new item to the DB");
             return itemDao.save(item);
         }
 
     @Override
     public Item findByItemId(int itemId) throws ItemNotFoundException {
+            logger.info("finding an item by item id:"+itemId);
         return itemDao.findById(itemId).orElseThrow(()->new ItemNotFoundException());
     }
 
     @Override
     public Item updateItemDetails(int itemId, Item item) throws ItemNotFoundException {
+
+            logger.info("updating an item with item id:"+itemId);
+
      Item savedItem = itemDao.findById(itemId).orElseThrow(()->new ItemNotFoundException());
 
      savedItem.setItemName(item.getItemName());
@@ -46,17 +51,15 @@ public class ItemServiceImpl implements ItemService {
      savedItem.setCost(item.getCost());
      savedItem.setCart(item.getCart());
      savedItem.setMfgDate(item.getMfgDate());
+
+        logger.info("item details are updated successfully");
      return itemDao.save(savedItem);
     }
 
-    public int getCartOfItem(int itemId) throws ItemNotFoundException {
-
-            Item item = itemDao.findById(itemId).orElseThrow(()-> new ItemNotFoundException());
-
-        return item.getCart().getCartId();
-
+    @Override
+    public List<Item> getAllItem() {
+        return itemDao.findAll();
     }
-
 
 
 }

@@ -14,8 +14,8 @@ public interface CartService {
 
     public Cart createCart(Cart cart) throws CustomerNameAlreadyExistsException;
     public boolean deleteCart(int cartId) throws CartNotFoundException;
-    public Cart findByCartId(int cartId) throws CartNotFoundException;
-    public Cart findByCustomerName(String CustomerName) throws CustomerNameNotFoundException;
+    public Cart getCartByCartId(int cartId) throws CartNotFoundException;
+    public Cart getCartByCustomerName(String CustomerName) throws CustomerNameNotFoundException;
     public List<Item> getItemsOfTheCart(int cartId) throws CartNotFoundException;
-    public Cart addItemToTheCart(Item item,int cartId) throws ItemNotFoundException, CartNotFoundException;
+    public Cart addItemToTheCart(int itemId,int cartId) throws ItemNotFoundException, CartNotFoundException;
 }

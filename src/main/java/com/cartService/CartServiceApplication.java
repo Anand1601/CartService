@@ -15,9 +15,7 @@ public class CartServiceApplication {
 
 ApplicationContext applicationContext = SpringApplication.run(CartServiceApplication.class,args);
 
-		Item item = new Item();
-		item.setMfgDate(LocalDateTime.of(2020,1,12,5,0));
-System.out.println("hello spring");
+
 
 	}
 

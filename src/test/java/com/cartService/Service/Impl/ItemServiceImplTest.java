@@ -84,28 +84,6 @@ public class ItemServiceImplTest {
 
      }
 
-/*
-* test getCartOfItem
-* */
-     @Test
-    public void testGetCartOfItem() throws ItemNotFoundException {
-         Cart cart = new Cart();
-         cart.setCustomerName("anand");
-           Item item = new Item();
-           item.setCart(cart);
-     item.setItemName("iphone");
-     item.setMfgDate(LocalDateTime.of(2020,10,14,2,0));
-     item.setItemDescription("it is an electronic device");
-     item.setCost(51000);
-     item.setCategory("electronics");
-
-     Mockito.when(itemDaoMock.findById(1)).thenReturn(Optional.of(item));
-
-     int cartId = itemService.getCartOfItem(1);
-
-     Assertions.assertEquals(cartId,cart.getCartId());
-
-    }
 
 
 
