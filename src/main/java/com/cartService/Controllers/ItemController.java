@@ -61,6 +61,15 @@ public class ItemController {
         return new ResponseEntity(itemResponse,HttpStatus.OK);
     }
 
+   /*
+    * get all the items stored in DB
+    *
+    * GET 127.0.0.1.8080/cartService/v1/items
+    * */
+    @GetMapping
+    public ResponseEntity getAllItems(){
+        return new ResponseEntity(itemService.getAllItem(),HttpStatus.OK);
+    }
 
 
 

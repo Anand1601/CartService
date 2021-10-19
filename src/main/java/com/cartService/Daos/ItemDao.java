@@ -9,4 +9,5 @@ import java.util.List;
 public interface ItemDao extends JpaRepository<Item, Integer> {
 
     public List<Item> findItemsByCart(Cart cart);
+    public List<Item> findByItemName(String itemName);
 }
